@@ -5,7 +5,7 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 
 # Load the data from the Excel file
-df = pd.read_excel('MovieFranchises.xlsx')
+df = pd.read_excel('Dataset/MovieFranchises.xlsx')
 
 # Display the first few rows of the dataset to understand its structure
 print(df.head())
