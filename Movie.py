@@ -14,13 +14,19 @@ df['Lifetime Gross'] = df['Lifetime Gross'].replace('[\$,]', '', regex=True).ast
 # Handle missing or invalid data
 df.dropna(subset=['Budget', 'Lifetime Gross'], inplace=True)
 
-# Create a histogram of Budget
 bin_width = 50_000_000  # $50 million per bin
 max_budget = df['Budget'].max()
 bins = np.arange(0, max_budget + bin_width, bin_width)
 
 plt.figure(figsize=(10, 6))
-plt.hist(df['Budget'], bins=bins, color='skyblue', edgecolor='black', alpha=0.7)
+
+n, bins, patches = plt.hist(df['Budget'], bins=bins, edgecolor='black', alpha=0.7)
+
+# Change colors for each bin
+colors = plt.cm.Blues(np.linspace(0.4, 1, len(patches)))  # Generate a gradient of blue shades
+for patch, color in zip(patches, colors):
+    patch.set_facecolor(color)
+
 plt.xlabel('Budget ($ Millions)')
 plt.ylabel('Frequency')
 plt.title('Histogram of Movie Budgets')
